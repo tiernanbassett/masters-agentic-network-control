@@ -63,7 +63,33 @@ The author used a few thousand MCQs and mutliple models, noting their accuracy a
 They found a tradeoff between computational capability, latency and accuracy, this is particularly relevant to our loop as the agent will need to be accurate enough to be good but quick enough too.
 
 ### Challenges
-Obvious risks, hallucinations, context poisoning, safety
+Obvious risks, hallucinations, context poisoning, safety, need for some coordination between agents
 
 ### Critical Analysis
 They did not use an actual loop simulation, and didn't compare to a baseline deterministic model. They mainly compared different LLMs.
+
+# Understanding O-RAN: Architecture, Interfaces, Algorithms, Security, and Research Challenges
+
+**Author:** Polese et al. (2023)
+
+**Description:** A survey and tutorial examining O-RAN architecture, interfaces, intelligent network control, and research challenges.
+
+## Notes
+
+### Existing Wireless Network Architecture
+Traditional networks were sold to network operators as unconfigurable black boxes. This limits interpoerability and coordination between nodes and can leave someone stuck with the same vendor. (vendor lock-in)
+
+### O-RAN Architecture
+O-RAN is a modular version of this with seperate components, open interfaces for configurability, and intelligent controllers (slower (non RT RIC) which hosts rApps, and fast (near RT RIC) which hosts xApps). An RIC may control a group of network nodes.
+
+### Intelligent Network Control
+An xApp takes in measurments(KPMs) and uses them. These KPIs effect its action. It controllers network components using an E2 interface, which is standardised to allow compatibility between the controller and the nodes. rApps take longer and make longer term decisions such as policies, which are communicated to Near RT RIC using an A1 interface. 
+
+### Relevance to My Dissertation
+Like rApps, an agent can operate at a higher level if the latency isn't sufficient enough for xApps actions. The architecture of a closed loop control with post-action safety mechanisms is something that could inspire an agentic control loop in a network.
+
+### Challenges and Limitations
+Indirect conflicts can occur when two xApps configure parameters that aren't exactly conflicting but can cause a degradation when coupled. This can go undetected and allows room for testing a mechanism to mitigate this, for example, an AI agent.
+
+### Critical Analysis
+No direct demonstration that AI control with RIC performs better than traditional optimisation, but lists all of the features added or upgraded from traditional networks.
