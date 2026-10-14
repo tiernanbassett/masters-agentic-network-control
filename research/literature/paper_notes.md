@@ -93,3 +93,35 @@ Indirect conflicts can occur when two xApps configure parameters that aren't exa
 
 ### Critical Analysis
 No direct demonstration that AI control with RIC performs better than traditional optimisation, but lists all of the features added or upgraded from traditional networks.
+
+# Scheduling Algorithms for 5G Networks and Beyond: Classification and Survey
+
+**Author:** Mamane et al. (2022)
+
+**Description:** A survey paper examining radio resource allocation and scheduling algorithms in 5G networks.
+
+## Notes
+
+### Radio Resource Management and Scheduling
+Radio resources are broken up into reource blocks, which are 2D blocks of time and bandwidth. The base station uses schedulers to hand out these resource blocks. There are mutliple algorithms of varying complexity, different algorithms consider different metrics and prioritise different things. These include Proportional Fair and Round Robin.
+
+### Scheduling Algorithms
+These vary in complexity and take into account different things such as channel quality, average throughput etc. Round robin is totally fair, PF takes CQI and avg throughput into account, best CQI always prioritises the best channel quality.
+
+### Factors Influencing Scheduling Decisions
+CQI, average throughput, user's needs (URLLC, eMBB, mMTC), buffer size, HOL delay
+
+### Performance Evaluation Metrics
+throughput (data/time), goodput (data-overhead/time), latency, spectral efficiency(bps/bandwidth), fairnes, packet loss ration
+
+### Machine Learning-Based Scheduling
+ML-based scheduling uses ML models to try to optimise scheduling based on multiple metrics adn objectives. In hopes it is more accurate/true to what the operator wants. They are more complex generally and take more computational time.
+
+### Relevance to My Dissertation
+This shows that different network objectives need different strategies. Agentic AI may deal well with this flexibility and high-level objectives. Algorithms like these may be used as baselines.
+
+### Challenges and Limitations
+Tradeoff between throughput and fairness when scheduling. Can't have always perfect conditions for everyone. Some algorithms while better may add additional complexity (this may be relevant to my agent).
+
+### Critical Analysis
+This survey explains different types of scheduling, some advanced ones, the metrics schedulers use and how resources are allocated. No experiments however if I need to make one I can use something from here as a baseline.
