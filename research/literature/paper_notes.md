@@ -125,3 +125,26 @@ Tradeoff between throughput and fairness when scheduling. Can't have always perf
 
 ### Critical Analysis
 This survey explains different types of scheduling, some advanced ones, the metrics schedulers use and how resources are allocated. No experiments however if I need to make one I can use something from here as a baseline.
+
+# Towards Closed-loop Automation in 5G Open RAN: Coupling an Open-Source Simulator with xApps
+
+**Author:** Karamplias et al. (2022)
+
+**Description:** A paper that demonstrates closed loop automation using an RL-based controller to optimise power and throughput.
+
+## Notes
+
+### Closed-Loop Control Architecture
+Two xApps operating using the Near-RT RIC. xApp 1 generating measurements and xApp 2 containing the DRL-based algorithms. Controller can switch between different pretrained algorithms depending on objective. Process repeats creating a loop.
+
+### Experimental Evaluation
+Controller was compared to an average transmission power controller. Results demonstrated generall better throughput and network performance, but omitted latency and computational complexity.
+
+### Relevance to My Dissertation
+Potentially I can use the same loop idea for the agent, this also gives a baseline for me to compare to.
+
+### Challenges and Limitations
+There's no post-action safety guardrails (such as checkpointing) mentioned in the paper, and as already identified the latency and computational complexity isn't included in their experimental comparison.
+
+### Critical Analysis
+The paper successfully shows that this is possible and you can get good results, but doesn't give enough evidence with regards to post-action safety or complexity/latency for it to be deployed as a real network controller. I'd imagine my agent may have the same limitations.
