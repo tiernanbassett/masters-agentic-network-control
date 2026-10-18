@@ -1,0 +1,15 @@
+# Literature Review
+
+This file is a draft/rough literature review so far
+
+Papers reviewed so far have shown how different algorithms, machine learning, and agentic AI can all be used in controlling networks.
+
+Mamane et al. (2022) shows how radio resources are distributed, using resource blocks of time and bandwidth. Multiple scheduling algorithms of differing complexity and priority are also discussed, such as Proportional Fair and Round-Robin. The idea of increasing complexity extends into the realm of machine learning, and using different optimisation algorithms and reinforcement learning. Karamplias et al. (2022) demonstrate the use of DRL in a closed-loop environment, showing a performance advantage at times of using their model for transmission power compared to an average baseline. Agentic AI introduces a new control method into the mix, possible allowing system to reason about a wider context.
+
+Polese et al. (2023) discuss the O-RAN architecture, and how configurable control applications can be seperated from the network. Applications can propose actions to the infrastructure and interact with each other using different interfaces such as E2 and A1. Also included in the architecture is the idea of near-real time controllers and non-real time controllers, whcih can seperate actions that aren't time-sensitive and require more processing to ones that are. This modular architecture inspires different controllers to be developed and tested, and as an extension of that paves the way for agentic AI to be tested as a controller without integrating it into the actual infrastructure.
+
+Wang et al. (2025) discuss how LLMs can be utilised to create specialised agents that have certain objectives and can interact and learn from their environment. They also talk about how as AI's 'intelligence' gets deeper, its use cases get wider. It's discussed how Agentic AI is used in sectors such as legal, and engineering. Ferrag et al. (2026) extend this to AI-native networks, proposing that agents can observe networks from a high level and reason about multiple aspects of the network along with a high-level objective. It's proposed that this could offer greater flexibility than deterministic controllers that are designed around predefined objectives.
+
+The addition of agents to networks introduces many issues however, including latency. Ferrag et al. introduce a tradeoff between computational complexity, agent accuracy, and latency. There are also many safety concerns, Wang et al. discuss issues with hallucinations and knowledge boundary, which may cause the agent to send damaging network commands.
+
+While Karamplias et al. demonstrated a successful closed-loop simulation, their safety implementation was a pre-action guardrail, including a max and min for transmission power. In contrast, post-actions safety mechanisms should defintiely be in place for an agentic controller, checking if any measurements are not at an acceptable standard. These post-action mechanisms can also be a feedback tool for the controller, allowing it to consider it in future decisions.
