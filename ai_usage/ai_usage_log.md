@@ -11,3 +11,4 @@
 - **14/10/2026:** ChatGPT used to create literature overview from my paper notes.
 - **15/10/2026:** ChatGPT used to help format markdown files to make them more readable on GitHub. Content written by myself.
 - **15/10/2026:** ChatGPT used to create literature overview from my paper notes.
+- **19/10/2026:** ChatGPT used to help walk through AI-Native Network Controller code.
