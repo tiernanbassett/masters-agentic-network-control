@@ -148,3 +148,43 @@ There's no post-action safety guardrails (such as checkpointing) mentioned in th
 
 ### Critical Analysis
 The paper successfully shows that this is possible and you can get good results, but doesn't give enough evidence with regards to post-action safety or complexity/latency for it to be deployed as a real network controller. I'd imagine my agent may have the same limitations.
+
+# AI-Native Network Controller: A Modular Framework for Safe Agentic Control of Multi-Domain Network Infrastructure
+
+**Author:** Dzaferagic (2026)
+
+**Description:** A research paper presenting an open-source, modular AI-native network controller designed to support safe agentic control across multiple network domains.
+
+## Notes
+
+### Existing Network Controllers
+- Existing Controllers are generally domain-specific, and as networks become more hetergeneous, the ability to control across domains becomes essential. Existing controllers also lack support for Agentic AI across domains.
+
+### Proposed AI-NNC Architecture
+- **Control Plane:** Includes the apps that can offer configurations and read measurements, as well as the MCP server for the agent.
+- **Registration Plane:** Including a registration of all apps and nodes in the network. Also keeps track of which measurements and commands are available.
+- **Data Plane:** Includes a ZeroMQ message broker which sends data between nodes adn apps. 
+
+### Network Node Integration
+- Nodes are connected to the controller via adapters which act as middlemen between the nodes and the controller. These node adapters can handle setup, sending measurements, and applying configurations.
+
+### Control Applications and MCP
+- Applications include different commands which can be used on different nodes. There are @agent_controlled ones too which allow agents to invoke them as tools using an MCP server.
+
+### Safety Guardrails and Command Validation
+- There is a command validator (given by @command_validator) used to ensure that any command issued from an app, whether it be issued by an agent or not, does not go over or under a max/min threshold for a parameter. This essentially acts as a safety gaurdrail. This does not however stop a command from worsening network performance.
+
+### Conflict Detection
+- The controller also detects when two apps will conflict, this also includes indirect conflicts. This is detected in the registration plane which keeps track of what apps issue commands to what nodes. The conflict mitigator in the plane mitigates the conflict arbitrates the conflict.
+
+### Experimental Evaluation
+- Controller validated with both simulated and physical optical equipment
+
+### Relevance to My Dissertation
+- Using this controller may be valuable to my project as it is flexible, already includes pre-action safety with the command validator, and already enables MCP for an agent. It is also open source and there is good documentation on it. The paper even notes that it can be paired with other controllers such as O-RAN Near-RT RIC
+
+### Challenges and Limitations
+- I think for adding an agent to this a loop needs to be added, along with post-action validation. This includes checkpointing and rollback, as even with satefy guardrails an agent may decrease performance.
+
+### Critical Analysis
+- This is a promising contender for a controller to use for an AI agent, however more research into alternatives is needed.
