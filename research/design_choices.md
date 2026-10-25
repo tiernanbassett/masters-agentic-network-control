@@ -10,6 +10,8 @@ Alternatives: ORAN-RIC - no built-in MCP support, requires more work to add agen
 
 In the AI-NNC there is an srsRAN node but it only sends measurements, could come up with some way to issue commands using handle_command()?
 
+## Controller Comparison
+
 ## OCUDU
 
 OCUDU to issue commands: Open source, supports changin resource block allocation policies over a wireless network
