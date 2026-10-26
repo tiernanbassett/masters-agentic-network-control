@@ -11,6 +11,7 @@ Alternatives: ORAN-RIC - no built-in MCP support, requires more work to add agen
 In the AI-NNC there is an srsRAN node but it only sends measurements, could come up with some way to issue commands using handle_command()?
 
 ## Controller Comparison
+Found example RICs for OCUDU, flexRIC and ORAN SC RIC. Unsure on how to adapt AI-NNC to issue commands to OCUDU, needs more research. Possible API?, FlexRIC and ORAN SC RIC could be used as a bridge? But dont know about the added complexity.
 
 ## OCUDU
 
@@ -23,3 +24,6 @@ Potential parameters: tx power, resource block allocation, scheduling
 ## Evaluation
 
 Evaluation: Could compare agent to optimisation algorithms, baselines etc.
+
+## Agent Harness
+OpenClaw, Hermes, OpenCode, LangGraph, OpenAI SDK. Research and comparison needed

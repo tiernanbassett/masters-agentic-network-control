@@ -188,3 +188,28 @@ The paper successfully shows that this is possible and you can get good results,
 
 ### Critical Analysis
 - This is a promising contender for a controller to use for an AI agent, however more research into alternatives is needed.
+
+# ReAct: Synergizing Reasoning and Acting in Language Models
+
+**Author:** Yao et al. (2023)
+
+**Description:** Paper demonstrating the ReAct framework, where LLMs combine reasoning and acting to produce better and more accurate results
+
+## Notes
+
+### ReAct Architecture
+An LLM observes from its environment, reasons about what it observed, and then acts based on its reasoning, it can then observe again to create a loop.
+
+### Experimental Evaluation
+ReAct was compared against CoT (just reasoning) and Act using different benchmarks such as HotPotQA and ALFWorld, this involved desicion making and fact verification.
+
+### Findings
+It outperformed the alternatives almost all of the time, CoT outperformed it on HotPotQA, prompting the authors to combine the two and outperform both of them.
+
+### Relevance to My Dissertation
+This framework would work well for my agrentic loop as it reduces hallucinations and helps with decision making. The authors specify too that reasoning doesn't have to occur on every step for good results, which may help with the issue of latency.
+
+### Challenges and Limitations
+One limitation is latency, for example, in a fast-paced environment the LLM may be reasoning over expired measurements form its observation, leading to multiple wrong actions. There is also still issues with repeptitive incorrect actions or wrong though processes.
+
+### Critical Analysis
