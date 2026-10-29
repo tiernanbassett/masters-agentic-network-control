@@ -26,4 +26,11 @@ Potential parameters: tx power, resource block allocation, scheduling
 Evaluation: Could compare agent to optimisation algorithms, baselines etc.
 
 ## Agent Harness
-OpenClaw, Hermes, OpenCode, LangGraph, OpenAI SDK. Research and comparison needed
+OpenClaw(existing environment, schedulers)
+Hermes(existing environment, schedulers)
+OpenCode(existing environment) 
+LangGraph(persistent states, straightforward workflow that must be followed)
+OpenAI SDK (session saving, built in loop)
+
+LangGraph more programmable but more work required then. Others dont have as explicit a flow and may require more work to implement the exact loop i want.
+So depends if I want to program more of an environment or more of a structure, not sure which is better and which is more work.
