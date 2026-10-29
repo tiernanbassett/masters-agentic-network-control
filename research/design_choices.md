@@ -34,3 +34,13 @@ OpenAI SDK (session saving, built in loop)
 
 LangGraph more programmable but more work required then. Others dont have as explicit a flow and may require more work to implement the exact loop i want.
 So depends if I want to program more of an environment or more of a structure, not sure which is better and which is more work.
+
+## Connecting OCUDU to AI-NNC
+Need to bridge gap, will likely extend srsRAN node adapter to handle wireless configs (PRB allocation, tx power, not sure yet).
+
+Can maybe connect to seperate xApp to route to sepserate RIC (ORAN SC RIC, FlexRIC both mentioned in OCUDU docs, ORAN SC RIC repo has a simple_rc_xapp file that can issue configs for prb allocations, need to do deeper research into available xapps and test how it works with OCUDU)
+
+Might help with resolving issue of configuring E2 interface myself and support modularity
+
+Potentially Sending Configs: Agent -> AI-NNC app -> message broker -> Node adapter -> xApp -> RIC -> OCUDU
+Receiving measurments: Example wireless node uses influxDB, dont know how this can relate to a wireless sim on OCUDU, need to research thia
