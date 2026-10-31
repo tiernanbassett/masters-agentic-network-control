@@ -19,3 +19,5 @@
 - **26/10/2026:** ChatGPT used to help format markdown files to make them more readable on GitHub. Content written by myself.
 - **26/10/2026:** ChatGPT used to create literature overview from my paper notes.
 - **29/10/2026:** ChatGPT used to once again walk through ORAN SC RIC xApp code.
+- **31/10/2026:** ChatGPT used to help format markdown files to make them more readable on GitHub. Content written by myself.
+- **31/10/2026:** ChatGPT used to create literature overview from my paper notes.

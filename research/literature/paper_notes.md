@@ -213,3 +213,33 @@ This framework would work well for my agrentic loop as it reduces hallucinations
 One limitation is latency, for example, in a fast-paced environment the LLM may be reasoning over expired measurements form its observation, leading to multiple wrong actions. There is also still issues with repeptitive incorrect actions or wrong though processes.
 
 ### Critical Analysis
+Its a well put together paper, and includes a good variety of experiments, it shows that it can be very useful in loop environments, which is what my agent would be in. However, hallucinations still happen. Verification of its usefulness in a wireless network environment still needs to be researched.
+
+# Securing Agentic AI: Threat Modeling and Risk Analysis for Network Monitoring Agentic AI System
+
+**Author:** Zambare et al. (2025)
+
+**Description:** This paper investigates the security risks of Agentic AI use in networks, and uses the MAESTRO framework to mitigate these risks
+
+## Notes
+
+### Agentic AI Security Risks
+Agentic AI contains many components to be attacked, such as memory, instructions, reasoning steps. There are methods to compromise them already, including memory poisoning, prompt injection, and goal misalignment.
+
+### Proposed Architecture
+The proposed architecture in this paper includes monitoring the network, checking security, and analysing performance. The agent then reasons with the results and suggests commands and changes parameters.
+
+### Threat Modelling (MAESTRO)
+MAESTRO is a seven layer threat modelling framework that can help engineers and researchers detect and rank the risks and vulnerabilities in agents, from the foundational LLM model to their own instructions. This is done through looking at the impact of the risk, the likelihood, and the explorability.
+
+### Experimental Evaluation
+Two experiments were done. One was based on resource exhaustion where the network was overloaded (a DOS attack). The other was memory poisoning where researchers injected 20 fake records into the agent. 
+
+### Findings
+Both experiments had detrimental affects on the agent's performance. When resource use was high it caused the agent to lag and issue late commands. When memory poisoning occured it caused the agent to make decisions and reason about false memory. Both being detrimental.
+
+### Relevance to My Dissertation
+This paper highlights limitations of agents that are relevant to my dissertation, mainly focusing on latency and reliability. Actual security attacks can be considered as future work past my final work. Always good to know the limitations of agents especially in a wireless environment.
+
+### Critical Analysis
+The paper demonstrates well the differently vulnerabilites that agentic systems have, especially regarding security. It doesn't investigate many vulnerabilities that can happen naturally such as hallucinations. It demonstrates where things can go wrong, but acknowledges that it doesn't provide much with regards to mitigation of these. 
