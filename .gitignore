@@ -1,1 +1,3 @@
 /papers_archive
+__pycache__/
+*.pyc
