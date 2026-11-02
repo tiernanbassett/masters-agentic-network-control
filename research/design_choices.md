@@ -45,6 +45,9 @@ Might help with resolving issue of configuring E2 interface myself and support m
 Potentially Sending Configs: Agent -> AI-NNC app -> message broker -> Node adapter -> xApp -> RIC -> OCUDU
 Receiving measurments: Example wireless node uses influxDB, dont know how this can relate to a wireless sim on OCUDU, need to research thia
 
+Alternative to that:
+Make use of websocket + json, flow: agent sends configs to app, app commands have their own mcp and validation, commands sent to controller who sends it to the message broker, then subscribed nodes with ocudu websocket interface configure their parameters that way
+
 ## Pre-action safety
 In the app there is a command_validator in AI-NNC, this can act as a guardrail in my loop
 
@@ -52,3 +55,6 @@ In the app there is a command_validator in AI-NNC, this can act as a guardrail i
 Checkpointing and rollback. Checkpoint would be before add_command is called and saves the configuration at that time from the network. Rollback is done by the app as well, unsure what logic to go with (likely use measurements that check performance, must be mindful of other factors like increased network traffic though)
 
 All safety will be seperate to the agentic harness
+
+## Agent Action Space
+Different parameters, to be finalised, known ones at the moment are prb allocation and pwer

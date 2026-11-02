@@ -22,3 +22,4 @@
 - **31/10/2026:** ChatGPT used to help format markdown files to make them more readable on GitHub. Content written by myself.
 - **31/10/2026:** ChatGPT used to create literature overview from my paper notes.
 - **01/11/2026:** ChatGPT used to help with python syntax errors in practice safety control loop.
+- **02/11/2026:** ChatGPT used to help walk through ocudu documentation and ai-nnc code.
