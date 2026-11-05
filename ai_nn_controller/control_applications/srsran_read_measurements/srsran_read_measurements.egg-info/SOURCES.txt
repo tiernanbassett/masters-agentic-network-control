@@ -1,9 +1,0 @@
-aic_app.py
-commands.py
-pyproject.toml
-srsran_read_measurements.egg-info/PKG-INFO
-srsran_read_measurements.egg-info/SOURCES.txt
-srsran_read_measurements.egg-info/dependency_links.txt
-srsran_read_measurements.egg-info/entry_points.txt
-srsran_read_measurements.egg-info/requires.txt
-srsran_read_measurements.egg-info/top_level.txt

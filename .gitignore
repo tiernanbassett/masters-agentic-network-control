@@ -1,3 +1,13 @@
 /papers_archive
 __pycache__/
 *.pyc
+
+# Python generated files
+**/__pycache__/
+*.py[cod]
+**/build/
+**/*.egg-info/
+
+# Local environment credentials
+.env
+.env.*

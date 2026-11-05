@@ -1,2 +1,0 @@
-[ai_nn_controller.app_init]
-srsran_read_measurements:aic_app:commands = ai_nn_controller.plugins.entrypoints:bootstrap_application_bundle

@@ -1,6 +1,0 @@
-Metadata-Version: 2.4
-Name: srsran-read-measurements
-Version: 0.1.0
-Summary: srsRAN read measurements control application for ai_nn_controller
-Requires-Python: >=3.9
-Requires-Dist: ai_nn_controller>=1.0.0
