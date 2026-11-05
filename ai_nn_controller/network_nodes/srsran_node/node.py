@@ -15,6 +15,7 @@ import threading
 import time
 from time import sleep
 from influxdb_client import InfluxDBClient
+import os
 
 
 @node(name="srsRAN")
@@ -53,7 +54,7 @@ class SrsranNode(ControlledEntity):
         self._metrics_lock = threading.Lock()
 
         self._influx_url = self.config.get("influxdb_url", "http://influxdb:8086")
-        self._influx_token = self.config.get("influxdb_token", "")
+        self._influx_token = os.environ.get("INFLUXDB_TOKEN") or self.config.get("influxdb_token", "")
         self._influx_org = self.config.get("influxdb_org", "srs")
         self._influx_bucket = self.config.get("influxdb_bucket", "srsran")
         self._poll_interval = int(self.config.get("poll_interval", 1))

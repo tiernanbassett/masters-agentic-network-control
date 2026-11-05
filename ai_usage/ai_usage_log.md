@@ -23,3 +23,4 @@
 - **31/10/2026:** ChatGPT used to create literature overview from my paper notes.
 - **01/11/2026:** ChatGPT used to help with python syntax errors in practice safety control loop.
 - **02/11/2026:** ChatGPT used to help walk through ocudu documentation and ai-nnc code.
+- **05/11/2026:** ChatGPT used to help set up influxdb instance in powershell, and a script to generate measurements for it.
