@@ -25,3 +25,4 @@
 - **02/11/2026:** ChatGPT used to help walk through ocudu documentation and ai-nnc code.
 - **05/11/2026:** ChatGPT used to help set up influxdb instance in powershell, and a script to generate measurements for it.
 - **05/11/2026:** ChatGPT used to fix gitignore
+- **06/11/2026:** ChatGPT used to help modify test code to align with langgraph structure and syntax. Logic and baseline code written by myself. 
