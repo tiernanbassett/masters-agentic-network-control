@@ -243,3 +243,41 @@ This paper highlights limitations of agents that are relevant to my dissertation
 
 ### Critical Analysis
 The paper demonstrates well the differently vulnerabilites that agentic systems have, especially regarding security. It doesn't investigate many vulnerabilities that can happen naturally such as hallucinations. It demonstrates where things can go wrong, but acknowledges that it doesn't provide much with regards to mitigation of these. 
+
+# An Efficient Context-Dependent Memory Framework for LLM-Centric Agents
+
+**Author:** Gao et al. (2025)
+
+**Description:** Paper demonstrating CDMem framework, a multistaged approach to memory context for ai agents.
+
+## Notes
+
+### Problems with Existing Agent Memory
+Inefficient memory storage can lead to longer lantency, and in dynamically changing environments agents can be prevented from accessing actual relevant information.
+
+### Proposed Architecture
+Memory is encoded using three different tiers, storage stores memory based on tasks and environment, thing retrieved when needed.
+
+### Memory Encoding
+Three tiers, expert encoding summarises past experiences into short descriptions, long term gives more general insights from past experiences, short term encodes lessons on success and failure.
+
+### Memory Storage and Retrieval
+Memories are organised with two indices, task and enviroment, which the agent can use to search memory and retrieve relevant information.
+
+### Experimental Evaluation
+Used ALFWorld and ScienceWorld to evaluate the framework, evaluated against other frameworks such as ReAct.
+
+### Findings
+Outperformed all comparisons in both environments, however the computational cost must be looked at.
+
+### Computational Cost
+Heavier computational cost to other frameworks, double in some cases.
+
+### Relevance to My Dissertation
+My agent will need a way of remembering successes/failures, without latency being negatively impacted. This looks good but the computational cost is somehting of notes and the evaluations may not directly translate to a wireless network environement.
+
+### Challenges and Limitations
+Computational overhead is bigger, and as well if the agent hallucinates and encodes memory wrong, it may cause an avalanche effect on future decisions, would be bad for wireless network.
+
+### Critical Analysis
+The paper serves its purpose in showcasing a new context and memory framework, and addresses the issues it describes well. Could possible include more evaluation experiemnts. It is good compared to other frameworks but in the context of this dissertation may be too complex.
