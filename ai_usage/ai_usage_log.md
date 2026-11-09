@@ -26,5 +26,6 @@
 - **05/11/2026:** ChatGPT used to help set up influxdb instance in powershell, and a script to generate measurements for it.
 - **05/11/2026:** ChatGPT used to fix gitignore
 - **06/11/2026:** ChatGPT used to help modify test code to align with langgraph structure and syntax. Logic and baseline code written by myself. 
-- **08/10/2026:** ChatGPT used to help format markdown files to make them more readable on GitHub. Content written by myself.
-- **08/10/2026:** ChatGPT used to create literature overview from my paper notes.
+- **08/11/2026:** ChatGPT used to help format markdown files to make them more readable on GitHub. Content written by myself.
+- **08/11/2026:** ChatGPT used to create literature overview from my paper notes.
+- **09/11/2026:** ChatGPT used to help with type error while implementing SQLite.

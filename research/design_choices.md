@@ -13,6 +13,8 @@ In the AI-NNC there is an srsRAN node but it only sends measurements, could come
 ## Controller Comparison
 Found example RICs for OCUDU, flexRIC and ORAN SC RIC. Unsure on how to adapt AI-NNC to issue commands to OCUDU, needs more research. Possible API?, FlexRIC and ORAN SC RIC could be used as a bridge? But dont know about the added complexity.
 
+LangGraph chosen
+
 ## OCUDU
 
 OCUDU to issue commands: Open source, supports changin resource block allocation policies over a wireless network
@@ -20,6 +22,8 @@ OCUDU to issue commands: Open source, supports changin resource block allocation
 Alternatives: TBD
 
 Potential parameters: tx power, resource block allocation, scheduling
+
+OCUDU chosen
 
 ## Evaluation
 
@@ -34,6 +38,8 @@ OpenAI SDK (session saving, built in loop)
 
 LangGraph more programmable but more work required then. Others dont have as explicit a flow and may require more work to implement the exact loop i want.
 So depends if I want to program more of an environment or more of a structure, not sure which is better and which is more work.
+
+LangGraph chosen
 
 ## Connecting OCUDU to AI-NNC
 Need to bridge gap, will likely extend srsRAN node adapter to handle wireless configs (PRB allocation, tx power, not sure yet).
@@ -58,3 +64,8 @@ All safety will be seperate to the agentic harness
 
 ## Agent Action Space
 Different parameters, to be finalised, known ones at the moment are prb allocation and pwer
+
+## Agent memory
+Past actions + associated results, past measurements, past parameters (could possibly combine measurmeents and parameters into one tool call), could use timestamps for actions and the following measurements. Need to know the current measurements + configuration, as well as the last one (checkpoint) in case of rollback.
+
+For memory: SQLite, Postgres, MongoDB, Redis, HydraDB
