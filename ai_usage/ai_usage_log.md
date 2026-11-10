@@ -29,3 +29,4 @@
 - **08/11/2026:** ChatGPT used to help format markdown files to make them more readable on GitHub. Content written by myself.
 - **08/11/2026:** ChatGPT used to create literature overview from my paper notes.
 - **09/11/2026:** ChatGPT used to help with type error while implementing SQLite.
+- **10/11/2026:** ChatGPT used to help to fix make_decision function in persisten_memory/agent.py

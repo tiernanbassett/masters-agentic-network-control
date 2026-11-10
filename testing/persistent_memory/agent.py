@@ -10,6 +10,8 @@ from langgraph.graph import StateGraph, START, END
 class AgentState(TypedDict):
     measurements: dict | None
     history: Annotated[list[dict], operator.add]
+    last_decision: dict | None
+    decision_history: Annotated[list[dict], operator.add]
 
 
 def read_measurements(state: AgentState):
@@ -41,15 +43,39 @@ def read_measurements(state: AgentState):
     "history": [observation],
     }
 
+def make_decision(state: AgentState):
+
+    bler = state["measurements"]["ue_metrics"]["dl_bler"]
+
+    if bler is None:
+        action = "insufficient_data"
+    elif bler > 0.10:
+        action = "investigate_high_bler"
+    else:
+        action = "maintain_configuration"
+
+    decision = {
+        "action": action,
+        "status": "proposed",
+        "dl_bler": bler,
+        "observation_number": len(state["history"])
+    }
+
+    return {
+        "last_decision": decision,
+        "decision_history": [decision]
+    }
 
 graph = StateGraph(AgentState)
 graph.add_node("observe", read_measurements)
+graph.add_node("decide", make_decision)
 graph.add_edge(START, "observe")
-graph.add_edge("observe", END)
+graph.add_edge("observe", "decide")
+graph.add_edge("decide", END)
 
 config = {
     "configurable": {
-        "thread_id": "network-control-1"
+        "thread_id": "network-control-decide-1"
     }
 }
 
@@ -68,3 +94,6 @@ with SqliteSaver.from_conn_string("agent_checkpoints.sqlite") as checkpointer:
 
     print("Stored observations:", len(second["history"]))
     print(json.dumps(second["history"], indent=2))
+    print("Last decision:", second["last_decision"])
+    print("Stored decisions:", len(second["decision_history"]))
+    print(json.dumps(second["decision_history"], indent=2))
