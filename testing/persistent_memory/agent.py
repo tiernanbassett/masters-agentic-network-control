@@ -1,3 +1,4 @@
+
 import json
 from typing import TypedDict
 from urllib.request import Request, urlopen
@@ -12,6 +13,8 @@ class AgentState(TypedDict):
     history: Annotated[list[dict], operator.add]
     last_decision: dict | None
     decision_history: Annotated[list[dict], operator.add]
+    last_execution: dict | None
+    execution_history: Annotated[list[dict], operator.add]
 
 
 def read_measurements(state: AgentState):
@@ -39,12 +42,11 @@ def read_measurements(state: AgentState):
         raise RuntimeError(f"No valid observation: {observation}")
 
     return {
-    "measurements": observation,
-    "history": [observation],
+        "measurements": observation,
+        "history": [observation],
     }
 
 def make_decision(state: AgentState):
-
     bler = state["measurements"]["ue_metrics"]["dl_bler"]
 
     if bler is None:
@@ -66,12 +68,38 @@ def make_decision(state: AgentState):
         "decision_history": [decision]
     }
 
+def execute_decision(state: AgentState):
+    decision = state["last_decision"]
+    action = decision["action"]
+
+    if action == "insufficient_data":
+        status = "skipped"
+    elif action == "investigate_high_bler":
+        status = "investigation"
+    elif action == "maintain_configuration":
+        status = "no_change"
+    else:
+        raise ValueError(f"Unknown action: {action}")
+
+    execution = {
+        "action": action,
+        "execution_status": status,
+        "observation_number": decision["observation_number"]
+    }
+
+    return {
+        "last_execution": execution,
+        "execution_history": [execution]
+    }
+
 graph = StateGraph(AgentState)
 graph.add_node("observe", read_measurements)
 graph.add_node("decide", make_decision)
+graph.add_node("execute", execute_decision)
 graph.add_edge(START, "observe")
 graph.add_edge("observe", "decide")
-graph.add_edge("decide", END)
+graph.add_edge("decide", "execute")
+graph.add_edge("execute", END)
 
 config = {
     "configurable": {
@@ -97,3 +125,6 @@ with SqliteSaver.from_conn_string("agent_checkpoints.sqlite") as checkpointer:
     print("Last decision:", second["last_decision"])
     print("Stored decisions:", len(second["decision_history"]))
     print(json.dumps(second["decision_history"], indent=2))
+    print("Last execution:", second["last_execution"])
+    print("Stored executions:", len(second["execution_history"]))
+    print(json.dumps(second["execution_history"], indent=2))
