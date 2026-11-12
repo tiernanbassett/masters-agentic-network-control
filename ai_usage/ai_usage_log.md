@@ -31,3 +31,4 @@
 - **09/11/2026:** ChatGPT used to help with type error while implementing SQLite.
 - **10/11/2026:** ChatGPT used to help to fix make_decision function in persisten_memory/agent.py
 - **11/11/2026:** ChatGPT used to help record an execution in the execute_decision function in persisten_memory/agent.py
+- **12/11/2026:** ChatGPT used to clean up print statements

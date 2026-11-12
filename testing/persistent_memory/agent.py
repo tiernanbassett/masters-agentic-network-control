@@ -15,6 +15,7 @@ class AgentState(TypedDict):
     decision_history: Annotated[list[dict], operator.add]
     last_execution: dict | None
     execution_history: Annotated[list[dict], operator.add]
+    iterations_remaining: int
 
 
 def read_measurements(state: AgentState):
@@ -89,8 +90,15 @@ def execute_decision(state: AgentState):
 
     return {
         "last_execution": execution,
-        "execution_history": [execution]
+        "execution_history": [execution],
+        "iterations_remaining": state["iterations_remaining"] - 1
     }
+
+def continue_loop(state: AgentState):
+    if state["iterations_remaining"] > 0:
+        return "observe"
+    else:
+        return "end"
 
 graph = StateGraph(AgentState)
 graph.add_node("observe", read_measurements)
@@ -99,7 +107,14 @@ graph.add_node("execute", execute_decision)
 graph.add_edge(START, "observe")
 graph.add_edge("observe", "decide")
 graph.add_edge("decide", "execute")
-graph.add_edge("execute", END)
+graph.add_conditional_edges(
+    "execute",
+    continue_loop,
+    {
+        "observe": "observe",
+        "end": END
+    }
+)
 
 config = {
     "configurable": {
@@ -111,20 +126,19 @@ with SqliteSaver.from_conn_string("agent_checkpoints.sqlite") as checkpointer:
     agent = graph.compile(checkpointer=checkpointer)
 
     first = agent.invoke(
-        {"measurements": None, "history": []},
+        {"measurements": None, "history": [], "iterations_remaining":2},
         config
     )
 
     second = agent.invoke(
-        {"measurements": None},
+        {"measurements": None, "iterations_remaining":2},
         config
     )
 
-    print("Stored observations:", len(second["history"]))
-    print(json.dumps(second["history"], indent=2))
-    print("Last decision:", second["last_decision"])
-    print("Stored decisions:", len(second["decision_history"]))
-    print(json.dumps(second["decision_history"], indent=2))
-    print("Last execution:", second["last_execution"])
-    print("Stored executions:", len(second["execution_history"]))
-    print(json.dumps(second["execution_history"], indent=2))
+print("Stored observations:", len(second["history"]))
+print("Latest observation:", second["measurements"])
+print("Iterations remaining:", second["iterations_remaining"])
+print("Last decision:", second["last_decision"])
+print("Stored decisions:", len(second["decision_history"]))
+print("Last execution:", second["last_execution"])
+print("Stored executions:", len(second["execution_history"]))
