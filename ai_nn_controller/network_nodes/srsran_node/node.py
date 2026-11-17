@@ -14,7 +14,8 @@ from controlled_entity import ControlledEntity, node, NodeRunner
 import threading
 import time
 from time import sleep
-from influxdb_client import InfluxDBClient
+import json
+from urllib.request import Request, urlopen
 import os
 
 
@@ -63,75 +64,84 @@ class SrsranNode(ControlledEntity):
         thread.start()
         print(f"[srsRAN] InfluxDB poller started: {self._influx_url} bucket={self._influx_bucket}")
 
+
+    def _query_sql(self, sql):
+        """Query OCUDU's InfluxDB 3 database using SQL."""
+        payload = json.dumps({
+            "db": self._influx_bucket,
+            "q": sql,
+            "format": "json",
+        }).encode("utf-8")
+
+        request = Request(
+            f"{self._influx_url}/api/v3/query_sql",
+            data=payload,
+            headers={"Content-Type": "application/json"},
+            method="POST",
+        )
+
+        with urlopen(request, timeout=5) as response:
+            return json.load(response)
+
+    
     def _poll_influxdb(self):
-        """Background thread polling InfluxDB for srsRAN metrics."""
-        client = None
+        """Poll OCUDU cell and DU measurements from InfluxDB 3."""
         while True:
             try:
-                if client is None:
-                    client = InfluxDBClient(
-                        url=self._influx_url,
-                        token=self._influx_token,
-                        org=self._influx_org,
-                    )
-                    print(f"[InfluxDB] Connected to {self._influx_url}")
-
-                query_api = client.query_api()
                 measurements = {}
 
-                # Query latest UE info
-                ue_query = f'''
-                    from(bucket: "{self._influx_bucket}")
-                        |> range(start: -30s)
-                        |> filter(fn: (r) => r._measurement == "ue_info")
-                        |> last()
-                '''
-                ue_tables = query_api.query(ue_query)
-                for table in ue_tables:
-                    for record in table.records:
-                        field = record.get_field()
-                        value = record.get_value()
-                        if isinstance(value, (int, float)):
-                            measurements[field] = float(value)
-                        # Extract tags
-                        pci = record.values.get("pci")
-                        rnti = record.values.get("rnti")
-                        if pci is not None:
-                            measurements["pci"] = float(pci) if str(pci).isdigit() else pci
-                        if rnti is not None:
-                            try:
-                                measurements["rnti"] = float(int(rnti, 16))
-                            except (ValueError, TypeError):
-                                measurements["rnti"] = rnti
+                # Get the latest cell measurements
+                cell_rows = self._query_sql(
+                    "SELECT pci, average_latency FROM cell "
+                    "WHERE time >= now() - INTERVAL '30 seconds' "
+                    "ORDER BY time DESC LIMIT 1"
+                )
 
-                # Query latest app_resource_usage
-                res_query = f'''
-                    from(bucket: "{self._influx_bucket}")
-                        |> range(start: -30s)
-                        |> filter(fn: (r) => r._measurement == "app_resource_usage")
-                        |> last()
-                '''
-                res_tables = query_api.query(res_query)
-                for table in res_tables:
-                    for record in table.records:
-                        field = record.get_field()
-                        value = record.get_value()
-                        if isinstance(value, (int, float)):
-                            measurements[field] = float(value)
+                if cell_rows:
+                    cell = cell_rows[0]
+
+                    if cell.get("pci") is not None:
+                        measurements["pci"] = float(cell["pci"])
+
+                    if cell.get("average_latency") is not None:
+                        measurements["cell_average_latency"] = float(
+                            cell["average_latency"]
+                        )
+
+                # Get the latest MAC performance measurements
+                du_rows = self._query_sql(
+                    "SELECT du_high_mac_dl_0_cpu_usage_percent, "
+                    "du_high_mac_dl_0_average_latency_us "
+                    "FROM du "
+                    "WHERE time >= now() - INTERVAL '30 seconds' "
+                    "AND du_high_mac_dl_0_cpu_usage_percent IS NOT NULL "
+                    "ORDER BY time DESC LIMIT 1"
+                )
+
+                if du_rows:
+                    du = du_rows[0]
+
+                    for field in [
+                        "du_high_mac_dl_0_cpu_usage_percent",
+                        "du_high_mac_dl_0_average_latency_us",
+                    ]:
+                        if du.get(field) is not None:
+                            measurements[field] = float(du[field])
+
+                # Store the latest observation
+                with self._metrics_lock:
+                    self._latest_metrics = measurements
 
                 if measurements:
-                    with self._metrics_lock:
-                        self._latest_metrics.update(measurements)
                     print(f"[InfluxDB] Fetched {len(measurements)} fields")
                 else:
-                    print("[InfluxDB] No recent metrics in bucket")
+                    print("[InfluxDB] No recent OCUDU measurements")
 
             except Exception as e:
                 print(f"[InfluxDB] Error polling: {e}")
-                client = None  # Reconnect on next iteration
 
             sleep(self._poll_interval)
-
+            
     def poll_measurements(self):
         with self._metrics_lock:
             current = dict(self._latest_metrics)

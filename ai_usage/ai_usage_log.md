@@ -32,3 +32,5 @@
 - **10/11/2026:** ChatGPT used to help to fix make_decision function in persisten_memory/agent.py
 - **11/11/2026:** ChatGPT used to help record an execution in the execute_decision function in persisten_memory/agent.py
 - **12/11/2026:** ChatGPT used to clean up print statements
+- **17/11/2026:** ChatGPT used to assist with building and setting up docker containers, as well as with integrating OCUDU and the wireless node adapter. Mostly troubleshooting.
+- **17/11/2026:** ChatGPT used to assist in modifying node.py _poll_influxdb function to support influxdb 3 (which is used by OCUDU).
