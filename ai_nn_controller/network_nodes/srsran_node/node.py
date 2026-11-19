@@ -23,6 +23,12 @@ import os
 class SrsranNode(ControlledEntity):
     available_measurements = [
         "session_id",
+
+         # OCUDU cell and DU metrics
+        "cell_average_latency",
+        "du_high_mac_dl_0_cpu_usage_percent",
+        "du_high_mac_dl_0_average_latency_us",
+
         # UE-level metrics (from ue_info measurement)
         "pci",
         "rnti",
@@ -62,7 +68,7 @@ class SrsranNode(ControlledEntity):
 
         thread = threading.Thread(target=self._poll_influxdb, daemon=True)
         thread.start()
-        print(f"[srsRAN] InfluxDB poller started: {self._influx_url} bucket={self._influx_bucket}")
+        print(f"[srsRAN] InfluxDB poller started: {self._influx_url} bucket={self._influx_bucket}", flush=True)
 
 
     def _query_sql(self, sql):
@@ -133,12 +139,12 @@ class SrsranNode(ControlledEntity):
                     self._latest_metrics = measurements
 
                 if measurements:
-                    print(f"[InfluxDB] Fetched {len(measurements)} fields")
+                    print(f"[InfluxDB] Fetched {len(measurements)} fields", flush=True)
                 else:
-                    print("[InfluxDB] No recent OCUDU measurements")
+                    print("[InfluxDB] No recent OCUDU measurements", flush = True)
 
             except Exception as e:
-                print(f"[InfluxDB] Error polling: {e}")
+                print(f"[InfluxDB] Error polling: {e}", flush=True)
 
             sleep(self._poll_interval)
             

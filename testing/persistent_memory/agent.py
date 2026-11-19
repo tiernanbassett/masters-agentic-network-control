@@ -25,7 +25,7 @@ def read_measurements(state: AgentState):
     }
 
     request = Request(
-        "http://localhost:8000/mcp/tools/call",
+        "http://127.0.0.1:8000/mcp/tools/call",
         data=json.dumps(payload).encode("utf-8"),
         headers={"Content-Type": "application/json"},
         method="POST",

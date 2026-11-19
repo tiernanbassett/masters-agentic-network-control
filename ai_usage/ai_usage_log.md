@@ -34,3 +34,4 @@
 - **12/11/2026:** ChatGPT used to clean up print statements
 - **17/11/2026:** ChatGPT used to assist with building and setting up docker containers, as well as with integrating OCUDU and the wireless node adapter. Mostly troubleshooting.
 - **17/11/2026:** ChatGPT used to assist in modifying node.py _poll_influxdb function to support influxdb 3 (which is used by OCUDU).
+- **19/11/2026:** ChatGPT used to help with some docker commands and troubleshooting memory issues.

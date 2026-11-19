@@ -28,6 +28,11 @@ class SrsranReaderApp(AicApp):
     read_measurements = {
         10: [
             "session_id",
+
+            # OCUDU cell and DU metrics
+            "cell_average_latency",
+            "du_high_mac_dl_0_cpu_usage_percent",
+            "du_high_mac_dl_0_average_latency_us",
             "pci", "rnti",
             "dl_bitrate", "ul_bitrate",
             "dl_bler", "ul_bler",
@@ -59,6 +64,15 @@ class SrsranReaderApp(AicApp):
 
         return {
             "status": "ok",
+            "cell_metrics": {
+                "pci": latest.get("pci"),
+                "average_latency": latest.get("cell_average_latency"),
+            },
+
+            "du_metrics": {
+                "cpu_usage_percent": latest.get("du_high_mac_dl_0_cpu_usage_percent"),
+                "average_latency_us": latest.get("du_high_mac_dl_0_average_latency_us"),
+            },
             "ue_metrics": {
                 "pci": latest.get("pci"),
                 "rnti": latest.get("rnti"),
@@ -99,6 +113,9 @@ class SrsranReaderApp(AicApp):
         print("  --- System Metrics ---")
         for key in ["cpu_usage_percent", "memory_usage_MB", "power_consumption_Watts"]:
             print(f"  {key:<24}: {latest.get(key)}")
+        print("  --- OCUDU Cell and DU Metrics ---")
+        for key in [ "pci", "cell_average_latency", "du_high_mac_dl_0_cpu_usage_percent", "du_high_mac_dl_0_average_latency_us",]:
+            print(f"  {key:<40}: {latest.get(key)}")
 
 
 if __name__ == "__main__":
