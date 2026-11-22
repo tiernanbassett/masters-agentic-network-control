@@ -4,6 +4,7 @@ COPY controller_components/controlled_entity/ /tmp/controlled_entity/
 RUN pip install --no-cache-dir /tmp/controlled_entity && rm -rf /tmp/controlled_entity
 
 RUN pip install "influxdb-client<2"
+RUN pip install --no-cache-dir "websocket-client==1.9.0"
 
 WORKDIR /node
 
