@@ -36,5 +36,5 @@
 - **17/11/2026:** ChatGPT used to assist in modifying node.py _poll_influxdb function to support influxdb 3 (which is used by OCUDU).
 - **19/11/2026:** ChatGPT used to help with some docker commands and troubleshooting memory issues.
 - **22/11/2026:** ChatGPT used to assist in the coding of a configuration application and extending srsRan node to handle radio resource management control commands, using the same structure as the other apps, largely used for debugging and docker configurations.
-- **23/10/2026:** ChatGPT used to help format markdown files to make them more readable on GitHub. Content written by myself.
-- **23/10/2026:** ChatGPT used to create literature overview from my paper notes.
+- **23/11/2026:** ChatGPT used to help format markdown files to make them more readable on GitHub. Content written by myself.
+- **23/11/2026:** ChatGPT used to create literature overview from my paper notes.

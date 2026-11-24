@@ -17,3 +17,17 @@ __pycache__/
 *.sqlite-shm
 *.sqlite-wal
 /ocudu/
+
+# LaTeX generated files
+interim_report/*.aux
+interim_report/*.log
+interim_report/*.out
+interim_report/*.toc
+interim_report/*.synctex.gz
+interim_report/*.fls
+interim_report/*.fdb_latexmk
+interim_report/*.bbl
+interim_report/*.blg
+interim_report/*.lof
+interim_report/*.lot
+interim_report/main.pdf
