@@ -281,3 +281,29 @@ Computational overhead is bigger, and as well if the agent hallucinates and enco
 
 ### Critical Analysis
 The paper serves its purpose in showcasing a new context and memory framework, and addresses the issues it describes well. Could possible include more evaluation experiemnts. It is good compared to other frameworks but in the context of this dissertation may be too complex.
+
+# A Post-Action Verification Approach for Automatic Configuration Parameter Changes in Self-Organizing Networks
+
+**Author:** Tsvetkov et al. (2014)
+
+**Description:** This paper demonstrates the use of post-action verification and rollback in SON, due to the pre-action validator sometimes missing performance degrading configurations
+
+## Notes
+
+### Problems with Pre-Action Coordination
+Sometimes the pre-action validation can miss when multiple actions aren't harmful, but in combination with each other can cause a network deterioration
+
+### Proposed Verification and Rollback Mechanism
+The system checks multiple levels for a deterioration, looking at network KPIs, the cells, and the areas overall. When a deviation or unacceptable performance is detected, it decides what parameters need to change and rolls back to a safe configuration
+
+### Experimental Evaluation and Findings
+this was tested on a simulation LTE network, looking at the network with and without the post-action verification. It found that the network was more stable and recovered better with the post-action verification.
+
+### Relevance to My Dissertation
+My dissertation will implement a similar rollback mechanism, as the command validator might miss something thats allowed but causes network deterioration. This will be decided by the agent form looking at the measurements and will rollback to a checkpoint in the app.
+
+### Challenges and Limitations
+Experiment conducted in a simulation instead of a real network, so cant make any hard conclusions about its viaibility in the real world. Similar story with my project as it will be using an OCUDU simulated network
+
+### Critical Analysis
+The authors successfully deomonstrate how a rollback mechanism is useful, and can make a network safer and more stable. In a network controlled by an agent it would be very useful ad agents have their own limitations with hallucinations, context poisoning etc.
