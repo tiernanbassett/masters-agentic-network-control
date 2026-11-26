@@ -4,7 +4,7 @@
 \usepackage[margin=2.54cm]{geometry}
 \usepackage{graphicx}
 \usepackage{cite}
-\usepackage{hyperref}
+\usepackage[hidelinks]{hyperref}
 \usepackage{parskip}
 
 % Title information
@@ -38,8 +38,13 @@
 
 \section{Project Description}
 
+\subsection{Project Overview}
+This project will investigate the use of agentic artificial intelligence (AI) in controlling wireless networks. It will connect an agentic workflow built in LangGraph \cite{langgraph} to an AI-Native Network Controller (AI-NNC) \cite{dzaferagic2026ai}. Wireless measurements will be collected and configurations will be issued using the OCUDU platform \cite{ocudu}. The LangGraph workflow will include observation, decision, and execution nodes. There will be three control applications running in parallel within the controller: one for reading measurements, one for issuing configurations, and one for performing rollbacks. The rollback mechanism, inspired by previous post-action verification research \cite{tsvetkov2015post}, will allow the agent to revert to a safe configuration if it deems it necessary. Alongside this post-action safety mechanism, there will be command validation. In the AI-NNC, command validation functions act as guardrails in the control applications before any commands are sent to the network \cite{dzaferagic2026ai}. 
+
+The agent will be able to issue configuration commands and trigger rollbacks using Model Context Protocol (MCP) tools \cite{mcp} available in the applications. Another aspect that will be investigated is how the agent's memory is stored and used. The agent will need to store past measurements, configurations, and experiences to avoid repeating mistakes and reduce the risk of issuing harmful configurations. The memory storage system must also support efficient information retrieval and accommodate the increasing volume of measurements over time \cite{gao2025efficient}. Using this architecture, the application of agentic AI will be evaluated in terms of its safety, efficiency, and network performance.
+
 \subsection{Motivation}
-In recent years, large language models (LLMs) have become more capable of reasoning about their tasks \cite{xu2025toward}. Developments such as the ReAct framework, in which LLMs can reason and interact with their environment \cite{yao2023react}, have contributed to the rise of agentic artificial intelligence (AI) \cite{wang2024survey}. Alongside this growth in complexity and reasoning capability, there is now a wide range of applications of agentic AI \cite{wang2024survey}. AI agents have the potential to be used in various sectors, such as law, healthcare, and engineering \cite{wang2024survey}. 
+In recent years, large language models (LLMs) have become more capable of reasoning about their tasks \cite{xu2025toward}. Developments such as the ReAct framework, in which LLMs can reason and interact with their environment \cite{yao2023react}, have contributed to the rise of agentic AI \cite{wang2024survey}. Alongside this growth in complexity and reasoning capability, there is now a wide range of applications of agentic AI \cite{wang2024survey}. AI agents have the potential to be used in various sectors, such as law, healthcare, and engineering \cite{wang2024survey}. 
 
 
 Networking is another sector in which AI can be integrated \cite{polese2023understanding}. AI-native networking is the approach in which AI is a foundational element in networking infrastructure \cite{ferrag20266g}. For example, in wireless networks, radio resource scheduling can be performed by conventional algorithms such as Proportional Fair (PF) or Round-Robin (RR) \cite{mamane2022scheduling}. With AI-native networking, some of these traditional algorithms can be replaced with AI where suitable \cite{mamane2022scheduling}. 
@@ -49,8 +54,6 @@ One of the motivations behind AI-native networking is that network complexity an
 
 
 However, agentic AI has limitations such as hallucinations and increased latency \cite{wang2024survey}. Because of these limitations, the application of agentic AI in wireless networks needs to be investigated before deployment.
-\subsection{Project Overview}
-This project will connect an agentic AI workflow to a 
 \subsection{Goal and Objectives}
 
 \subsection{Progress to Date}
