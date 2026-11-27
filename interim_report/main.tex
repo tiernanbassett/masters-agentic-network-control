@@ -52,9 +52,16 @@ Networking is another sector in which AI can be integrated \cite{polese2023under
 
 One of the motivations behind AI-native networking is that network complexity and service demand have been increasing due to applications such as cloud computing and digital twins \cite{mamane2022scheduling,ferrag20266g}. A traditional algorithm may not always be able to meet the increase in demand and has limited capabilities to reason about complex scenarios \cite{ferrag20266g}, while agentic AI can reason about many aspects of its environment and past experiences \cite{wang2024survey}. As networks move towards 6G and demand increases, AI-native networking is a promising approach \cite{ferrag20266g}. Traditional network controllers may not have the ability to reason about some situations \cite{ferrag20266g}. For example, a combination of acceptable decisions may lead to network performance degradation \cite{tsvetkov2015post}. An agentic controller may be useful in a dynamic wireless network, with its reasoning capabilities potentially allowing it to outperform traditional algorithms \cite{dzaferagic2026ai}. 
 
-
 However, agentic AI has limitations such as hallucinations and increased latency \cite{wang2024survey}. Because of these limitations, the application of agentic AI in wireless networks needs to be investigated before deployment.
+
 \subsection{Goal and Objectives}
+The goal of this dissertation is to investigate the applicability of agentic AI in controlling wireless networks. This includes investigating how an agent can store and efficiently retrieve information, what safety mechanisms can be implemented to mitigate the limitations of agentic AI, and how autonomy, safety, network performance, and latency relate to one another.
+
+To investigate this, an experimental setup will be developed. This setup will include an agentic workflow built in LangGraph and connected to the AI-NNC. Using the AI-NNC's MCP integration capabilities, the agentic workflow will be able to call MCP tools provided by control applications to send configurations and read measurements. 
+
+Measurements will be read from and configurations will be sent to the OCUDU platform, which will be integrated into the architecture via a node adapter in the AI-NNC. With the AI-NNC's modularity, it will also be possible to test other non-agentic methods in this setup, such as Q-learning, RR, or PF \cite{mamane2022scheduling}.
+
+Using this experimental setup, agentic AI will be evaluated in terms of autonomy, safety, network performance, and latency. The agentic control approach will be compared with alternative control algorithms. Overall, this project aims to evaluate the applicability of agentic AI in wireless network control and identify any safety considerations that should be made.
 
 \subsection{Progress to Date}
 
