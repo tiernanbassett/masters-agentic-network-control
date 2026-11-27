@@ -64,6 +64,11 @@ Measurements will be read from and configurations will be sent to the OCUDU plat
 Using this experimental setup, agentic AI will be evaluated in terms of autonomy, safety, network performance, and latency. The agentic control approach will be compared with alternative control algorithms. Overall, this project aims to evaluate the applicability of agentic AI in wireless network control and identify any safety considerations that should be made.
 
 \subsection{Progress to Date}
+Thus far, I have reviewed 11 research papers in full and taken notes on them, while consulting many others to aid my design. I have researched agentic AI and various agentic frameworks and harnesses such as Hermes, OpenClaw, the OpenAI SDK, and LangGraph. I have researched different network control methods and different controllers such as AI-NNC, O-RAN SC RIC, and FlexRIC. I have also gotten familiar with OCUDU by reading documentation and experimenting with the platform.
+
+I have selected LangGraph as my agentic framework as it allows for an explicitly defined workflow. I have implemented a loop consisting of observation, decision, and execution nodes. The loop also incorporates a basic SQLite setup, with further research on persistent memory planned. I have decided to integrate this loop with the AI-NNC due to its MCP integration capabilities and built-in command validation. 
+
+I have created three control applications: one for reading measurements, one for issuing configurations, and one for executing rollbacks. The application for reading measurements is complete, while the other two are under development. I have set up OCUDU and connected the controller to InfluxDB through a node adapter to retrieve measurements. I have also managed to issue configuration commands to OCUDU via WebSocket, with full integration still to be completed.
 
 
 \section{Literature Review}
